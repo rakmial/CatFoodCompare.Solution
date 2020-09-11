@@ -6,12 +6,13 @@ using System.Collections.Generic;
 namespace CatFoodCompare.Tests
 {
   [TestClass]
-  public class CatFoodTests // : IDisposable
+  public class CatFoodTests : IDisposable
   {
-    //public void Dispose()
-    //{
-    //  CatFood.ClearAll();
-    //}
+    public void Dispose()
+    {
+      CatFood.ClearAll();
+    }
+    
     // Test Food Object 1
     static string testName = "Chicken & Salmon Rustic Blend";
     static string testBrand = "Open Farm";
@@ -78,7 +79,7 @@ namespace CatFoodCompare.Tests
     [TestMethod]
     public void KCalPrice_ReturnsKCalToPriceRatio_Float()
     {
-      float testKCalToPrice = testKCalKG * (testUnitMassG / 1000) / testPrice;
+      float testKCalToPrice = testKCalKG * testUnitMassG / 1000 / testPrice;
       Assert.AreEqual(testKCalToPrice, testFood.KCalPrice);
     }
     [TestMethod]
@@ -88,7 +89,7 @@ namespace CatFoodCompare.Tests
       string testFormattedCompare = "";
       foreach (CatFood food in CatFoodList)
       {
-        testFormattedCompare += String.Format("{0} {1}: {0:C2}", food.Brand, food.Name, food.KCalPrice);
+        testFormattedCompare += String.Format("{0} {1}: {2:C2}\n", food.Brand, food.Name, food.KCalPrice);
       }
       Assert.AreEqual(testFormattedCompare, CatFood.ComparePrice());
     }

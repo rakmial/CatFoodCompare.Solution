@@ -15,6 +15,8 @@ namespace CatFoodCompare.Models
     public float ProteinFatRatio { get; }
     public float KCalPrice { get; }
 
+    private static List<CatFood> _instances = new List<CatFood> {};
+
     public CatFood(string name, string brand, float price, int kCalKG, int unitMassG, 
       List<string> ingredients, Dictionary<string, int> guaranteedAnalysis)
     {
@@ -28,6 +30,23 @@ namespace CatFoodCompare.Models
         ProteinFatRatio = calculateProteinFatRatio(GuaranteedAnalysis["Crude Protein"], 
           GuaranteedAnalysis["Crude Fat"]);
         KCalPrice = calculateKCalPriceRatio(price, unitMassG, kCalKG);
+        _instances.Add(this);
+    }
+
+    public static string ComparePrice()
+    {
+      string formattedCompare = "";
+      foreach(CatFood catFood in _instances)
+      {
+        formattedCompare += String.Format("{0} {1}: {2:C2}\n", 
+          catFood.Brand, catFood.Name, catFood.KCalPrice);
+      }
+      return formattedCompare;
+    }
+
+    public static void ClearAll()
+    {
+      _instances.Clear();
     }
 
     private float calculateProteinFatRatio(int proteinValue, int fatValue)
@@ -37,7 +56,7 @@ namespace CatFoodCompare.Models
 
     private float calculateKCalPriceRatio(float price, int unitMassG, int kCalKG)
     {
-      return kCalKG * (unitMassG / 1000) / price;
+      return kCalKG * unitMassG / 1000 / price;
     }
   }
 }
