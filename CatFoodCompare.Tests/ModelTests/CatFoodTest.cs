@@ -58,8 +58,7 @@ namespace CatFoodCompare.Tests
     [TestMethod]
     public void KCalPrice_ReturnsKCalToPriceRatio_Float()
     {
-      float testScaleUnitMassGtoKG = 1000/Convert.ToSingle(testUnitMassG);
-      float testKCalToPrice = testKCalKG/testScaleUnitMassGtoKG*testPrice;
+      float testKCalToPrice = testKCalKG * (testUnitMassG / 1000) / testPrice;
       Assert.AreEqual(testKCalToPrice, testFood.KCalPrice);
     }
     // [TestMethod]
