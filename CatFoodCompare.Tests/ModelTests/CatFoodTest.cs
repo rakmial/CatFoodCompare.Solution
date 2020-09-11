@@ -14,7 +14,7 @@ namespace CatFoodCompare.Tests
     //}
     static string testName = "Chicken & Salmon Rustic Blend";
     static string testBrand = "Open Farm";
-    static double testPrice = 2.19;
+    static float testPrice = 2.19F;
     static int testKCalKG = 900;
     static int testUnitMassG = 156;
 
@@ -48,11 +48,11 @@ namespace CatFoodCompare.Tests
       Assert.AreEqual(testGuaranteedAnalysis, testFood.GuaranteedAnalysis);
     }
     [TestMethod]
-    public void ProteinFatRatio_ReturnsDoubleRatioProteinToFat_Double()
+    public void ProteinFatRatio_ReturnsFloatRatioProteinToFat_Float()
     {
-      double testProteinDoubleValue = Convert.ToDouble(testGuaranteedAnalysis["Crude Protein"]);
+      float testProteinFloatValue = Convert.ToSingle(testGuaranteedAnalysis["Crude Protein"]);
       int testFat = testGuaranteedAnalysis["Crude Fat"];
-      double testRatio = testProteinDoubleValue / testFat;
+      float testRatio = testProteinFloatValue / testFat;
       Assert.AreEqual(testRatio, testFood.ProteinFatRatio);
     }
     // [TestMethod]
