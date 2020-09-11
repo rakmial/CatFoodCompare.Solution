@@ -37,7 +37,7 @@ namespace CatFoodCompare.Tests
     }
 
     [TestMethod]
-    public void GetProperties_ReturnValues_PropertyValues()
+    public void GetProperties_ReturnsValues_PropertyValues()
     {
       Assert.AreEqual(testName, testFood.Name);
       Assert.AreEqual(testBrand, testFood.Brand);
@@ -46,6 +46,14 @@ namespace CatFoodCompare.Tests
       Assert.AreEqual(testUnitMassG, testFood.UnitMassG);
       Assert.AreEqual(testIngredients, testFood.Ingredients);
       Assert.AreEqual(testGuaranteedAnalysis, testFood.GuaranteedAnalysis);
+    }
+    [TestMethod]
+    public void ProteinFatRatio_ReturnsDoubleRatioProteinToFat_Double()
+    {
+      double testProteinDoubleValue = Convert.ToDouble(testGuaranteedAnalysis["Crude Protein"]);
+      int testFat = testGuaranteedAnalysis["Crude Fat"];
+      double testRatio = testProteinDoubleValue / testFat;
+      Assert.AreEqual(testRatio, testFood.ProteinFatRatio);
     }
     // [TestMethod]
     // public void MethodTested_Behavior_ExpectedResult()
