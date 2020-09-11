@@ -4,7 +4,7 @@ CatFood - an object model for comparison of different cat foods.
 
 ### _Tests & Functions_
 
-1. CatFood initializes with string values [name, brand], float price, int KCalKG, List<string> Ingredients, Dictionary<string, int> GuaranteedAnalysis associating protein, fat, fiber, and moisture to their percentages,  provides reader fields for each. 
+1. CatFood initializes with string values [name, brand], double unitPrice, int [kCalKG, unitMassG], List<string> Ingredients, Dictionary<string, int> GuaranteedAnalysis associating protein, fat, fiber, and moisture to their percentages,  provides reader fields for each. 
 2. ProteinFatRatio is calculated and reader provided as well.
 3. CatFood provides public instance method KCal$(option), which returns either KCal per dollar or price per 100Kcal based on option input.
 4. CatFood provides public class method ComparePrice(sortOrder, kCalOption), which calls KCal$ on its constituent instances to create a Dictionary<string, float> associating {brand, name, price} and sorting by alpha, price asc, or price desc. 
