@@ -48,12 +48,19 @@ namespace CatFoodCompare.Tests
       Assert.AreEqual(testGuaranteedAnalysis, testFood.GuaranteedAnalysis);
     }
     [TestMethod]
-    public void ProteinFatRatio_ReturnsFloatRatioProteinToFat_Float()
+    public void ProteinFatRatio_ReturnsProteinToFatRatio_Float()
     {
       float testProteinFloatValue = Convert.ToSingle(testGuaranteedAnalysis["Crude Protein"]);
       int testFat = testGuaranteedAnalysis["Crude Fat"];
       float testRatio = testProteinFloatValue / testFat;
       Assert.AreEqual(testRatio, testFood.ProteinFatRatio);
+    }
+    [TestMethod]
+    public void KCalPrice_ReturnsKCalToPriceRatio_Float()
+    {
+      float testScaleUnitMassGtoKG = 1000/Convert.ToSingle(testUnitMassG);
+      float testKCalToPrice = testKCalKG/testScaleUnitMassGtoKG*testPrice;
+      Assert.AreEqual(testKCalToPrice, testFood.KCalPrice);
     }
     // [TestMethod]
     // public void MethodTested_Behavior_ExpectedResult()
