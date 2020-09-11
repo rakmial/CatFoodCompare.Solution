@@ -31,7 +31,13 @@ namespace CatFoodCompare.Tests
       testUnitMassG, testIngredients, testGuaranteedAnalysis);
 
     [TestMethod]
-    public void Initialize_ReaderProperties_PropertyValues()
+    public void CatFoodConstructor_CreatesInstanceOfCatFood_CatFood()
+    {
+      Assert.AreEqual(typeof(CatFood), testFood.GetType());
+    }
+
+    [TestMethod]
+    public void GetProperties_ReturnValues_PropertyValues()
     {
       Assert.AreEqual(testName, testFood.Name);
       Assert.AreEqual(testBrand, testFood.Brand);
