@@ -12,7 +12,7 @@ namespace CatFoodCompare.Tests
     {
       CatFood.ClearAll();
     }
-    
+
     // Test Food Object 1
     static string testName = "Chicken & Salmon Rustic Blend";
     static string testBrand = "Open Farm";
@@ -89,7 +89,7 @@ namespace CatFoodCompare.Tests
       string testFormattedCompare = "";
       foreach (CatFood food in CatFoodList)
       {
-        testFormattedCompare += String.Format("{0} {1}: {2:C2}\n", food.Brand, food.Name, food.KCalPrice);
+        testFormattedCompare += String.Format("{0} {1}: {2:0} calories/$\n", food.Brand, food.Name, food.KCalPrice);
       }
       Assert.AreEqual(testFormattedCompare, CatFood.ComparePrice());
     }

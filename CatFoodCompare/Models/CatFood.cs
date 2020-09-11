@@ -38,7 +38,7 @@ namespace CatFoodCompare.Models
       string formattedCompare = "";
       foreach(CatFood catFood in _instances)
       {
-        formattedCompare += String.Format("{0} {1}: {2:C2}\n", 
+        formattedCompare += String.Format("{0} {1}: {2:0} calories/$\n", 
           catFood.Brand, catFood.Name, catFood.KCalPrice);
       }
       return formattedCompare;
