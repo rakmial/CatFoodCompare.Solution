@@ -16,6 +16,7 @@ namespace CatFoodCompare.Models
     public float KCalPrice { get; }
 
     private static List<CatFood> _instances = new List<CatFood> {};
+    private static Dictionary<string, CatFood> _ingredientXRef = new Dictionary<string, CatFood> {};
 
     public CatFood(string name, string brand, float price, int kCalKG, int unitMassG, 
       List<string> ingredients, Dictionary<string, int> guaranteedAnalysis)

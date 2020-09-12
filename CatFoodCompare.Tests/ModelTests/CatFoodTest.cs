@@ -89,9 +89,28 @@ namespace CatFoodCompare.Tests
       string testFormattedCompare = "";
       foreach (CatFood food in CatFoodList)
       {
-        testFormattedCompare += String.Format("{0} {1}: {2:0} calories/$\n", food.Brand, food.Name, food.KCalPrice);
+        testFormattedCompare += String.Format("{0} {1}: {2:0} calories/$\n", 
+          food.Brand, food.Name, food.KCalPrice);
       }
       Assert.AreEqual(testFormattedCompare, CatFood.ComparePrice());
+    }
+    [TestMethod]
+    public void MostLike_ReturnsListOfCatFoodsSortedByNumSharedIngredients_List()
+    {
+      List<string> testXRefIngredients1 = new List<string> {"Chicken", "Rice", "Salmon"}; 
+      List<string> testXRefIngredients2 = new List<string> {"Menhaden", "Rice", "Chicken Liver"};
+      List<string> testXRefIngredients3 = new List<string> {"Salmon, Menhaden, Chicken Liver"};
+
+      CatFood.ClearAll();
+      
+      CatFood foodA = new CatFood("A", testBrand, testPrice, testKCalKG, testUnitMassG, 
+        testXRefIngredients1, testGuaranteedAnalysis);
+      CatFood foodB = new CatFood("B", testBrand, testPrice, testKCalKG, testUnitMassG, 
+        testXRefIngredients2, testGuaranteedAnalysis);
+      CatFood foodC = new CatFood("C", testBrand, testPrice, testKCalKG, testUnitMassG, 
+        testXRefIngredients3, testGuaranteedAnalysis);
+
+      Assert.AreEqual(new List<CatFood> {foodB, foodA}, CatFood.MostLike(foodC));
     }
     // [TestMethod]
     // public void MethodTested_Behavior_ExpectedResult()
