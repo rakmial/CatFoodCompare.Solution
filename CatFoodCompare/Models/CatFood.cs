@@ -16,7 +16,8 @@ namespace CatFoodCompare.Models
     public float KCalPrice { get; }
 
     private static List<CatFood> _instances = new List<CatFood> {};
-    private static Dictionary<string, CatFood> _ingredientXRef = new Dictionary<string, CatFood> {};
+    private static Dictionary<string, CatFood> _ingredientXRef = 
+      new Dictionary<string, List<CatFood>>() {};
 
     public CatFood(string name, string brand, float price, int kCalKG, int unitMassG, 
       List<string> ingredients, Dictionary<string, int> guaranteedAnalysis)
@@ -45,6 +46,30 @@ namespace CatFoodCompare.Models
       return formattedCompare;
     }
 
+    public static List<CatFood> MostLike(CatFood catFood)
+    {
+      Dictionary<CatFood, int> commonCount = new Dictionary<CatFood, int> {};
+      
+      foreach (string ingredient in catFood.Ingredients)
+      {
+        foreach (CatFood toCompare in _ingredientXRef[ingredient])
+        {
+          if (toCompare in commonCount.Keys)
+          {
+            commonCount[toCompare] += 1;
+          }
+          else
+          {
+            commonCount[toCompare] = 1;
+          }
+        }
+      }
+
+      commonCount.Remove(catFood.Name);
+
+      return commonCount.OrderBy(d => d.Value).ToList();
+    }
+
     public static void ClearAll()
     {
       _instances.Clear();
@@ -58,6 +83,24 @@ namespace CatFoodCompare.Models
     private float calculateKCalPriceRatio(float price, int unitMassG, int kCalKG)
     {
       return kCalKG * unitMassG / 1000 / price;
+    }
+
+    private void populate_ingredientXRef()
+    {
+      foreach (CatFood catFood in _instances)
+      {
+        foreach (string ingredient in catFood.Ingredients)
+        {
+          if (ingredient in _ingredientXRef.Keys)
+          {
+            _ingredientXRef[ingredient].Add(catFood);
+          }
+          else
+          {
+              _ingredientXRef[ingredient] = new List<string> {catFood};
+          }
+        }
+      }
     }
   }
 }
